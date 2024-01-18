@@ -86,7 +86,7 @@ class BookInstance(models.Model):
         ordering = ['book', 'due_back']
 
     def __str__(self):
-        return f'{self.id} ({self.book.title})'
+        return f'{self.book.title} ({self.id})'
 
 
 class Author(models.Model):
@@ -94,6 +94,7 @@ class Author(models.Model):
     last_name = models.CharField(max_length=100)
     date_of_birth = models.DateField("Born", null=True, blank=True)
     date_of_death = models.DateField('Died', null=True, blank=True)
+    nationality = models.CharField(max_length=200, blank=True)
 
     class Meta:
         ordering = ['last_name', 'first_name']

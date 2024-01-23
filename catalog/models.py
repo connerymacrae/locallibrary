@@ -69,7 +69,6 @@ class BookInstance(models.Model):
     due_back = models.DateField(null=True, blank=True)
     borrower = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
 
-
     LOAN_STATUS = (
         ('m', 'Maintenance'),
         ('o', 'On loan'),
@@ -87,6 +86,7 @@ class BookInstance(models.Model):
 
     class Meta:
         ordering = ['book', 'due_back']
+        permissions = (("can_mark_returned", "Set book as returned"),)
 
     def __str__(self):
         return f'{self.book.title} ({self.id})'

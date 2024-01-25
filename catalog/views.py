@@ -16,7 +16,7 @@ from django.urls import reverse
 from catalog.forms import RenewBookForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Author
+
 
 
 def index(request):
@@ -57,7 +57,7 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
-    paginate_by = 10
+    paginate_by = 20
 
 
 class BookDetailView(generic.DetailView):
@@ -66,6 +66,7 @@ class BookDetailView(generic.DetailView):
 
 class AuthorListView(generic.ListView):
     model = Author
+    paginate_by = 20
 
 
 class AuthorDetailView(generic.DetailView):
@@ -76,7 +77,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
     """Generic class-based view listing books on loan to current user."""
     model = BookInstance
     template_name = 'catalog/bookinstance_list_borrowed_user.html'
-    paginate_by = 10
+    paginate_by = 20
 
     def get_queryset(self):
         return (
@@ -90,7 +91,7 @@ class LoanedBooksListView(PermissionRequiredMixin, generic.ListView):
     permission_required = 'catalog.view_bookinstance'
     model = BookInstance
     template_name = 'catalog/bookinstance_list_borrowed.html'
-    paginate_by = 20
+    paginate_by = 25
 
     def get_queryset(self):
         return (
